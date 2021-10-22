@@ -1,0 +1,33 @@
+import Personas.*
+import Marcas.*
+
+describe "Personas y Jarras" {
+	const hofbrau = new Rubia(paisFabricacion = "Alemania", contenidoLupuloPorLitro = 10, graduacion = 0.08)
+	const jarraHofbrau = new Jarras(marca = hofbrau, capacidad = 0.5)
+	const hofbrau2 = new Rubia(paisFabricacion = "Alemania", contenidoLupuloPorLitro = 10, graduacion = 0.08)
+	const jarraHofbrau2 = new Jarras(marca = hofbrau2, capacidad = 0.5)
+	const hofbrau3 = new Rubia(paisFabricacion = "Alemania", contenidoLupuloPorLitro = 10, graduacion = 0.08)
+	const jarraHofbrau3 = new Jarras(marca = hofbrau3, capacidad = 0.5)
+	const javier = new PersonaBelga(peso = 100, leGustaMusicaTradicional = true, nivelDeAguante = 100)
+	method initialize() {
+		javier.agregarJarra(jarraHofbrau)
+		javier.agregarJarra(jarraHofbrau)
+		javier.agregarJarra(jarraHofbrau)
+		
+	}
+		
+	test "El contenido de alcohol de una jarra de cerveza de 8% de graduacion es de 0.04" {
+		assert.equals(0.04, jarraHofbrau.contenidoDeAlcohol())
+	}
+	test "El total de alcohol que ingirio Javier es 0.12" {
+		assert.equals(0.12, javier.totalDeAlcohol())
+	}
+	test "Javier no esta ebrio luego de tomar las 3 cervezas" {
+		assert.notThat(javier.estaEbria())
+	}
+	test "A javier le gusta la cerveza Rubia" {
+		assert.that(javier.leGusta(hofbrau))
+	}
+	
+}
+	

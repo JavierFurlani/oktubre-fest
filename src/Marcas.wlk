@@ -5,11 +5,16 @@ class MarcasDeCerveza {
 }
 
 object graduacionReglamentaria {
-	var property graduacion = 10
+	const property graduacion = 10
+	
 }
 
 class Rubia inherits MarcasDeCerveza {
+	const graduacion = 0.08
 	
+	override method graduacion() {
+		return graduacion
+	}
 }
 
 class Negra inherits MarcasDeCerveza {
@@ -28,4 +33,9 @@ class Roja inherits Negra {
 class Jarras {
 	var property capacidad
 	var property marca
+	
+	method contenidoDeAlcohol() {
+		return self.capacidad()*marca.graduacion()
+	}
+	
 }
