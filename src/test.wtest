@@ -1,19 +1,30 @@
 import Personas.*
 import Marcas.*
+import Carpas.*
+
 
 describe "Personas y Jarras" {
 	const hofbrau = new Rubia(paisFabricacion = "Alemania", contenidoLupuloPorLitro = 10, graduacion = 0.08)
 	const jarraHofbrau = new Jarras(marca = hofbrau, capacidad = 0.5)
-	const hofbrau2 = new Rubia(paisFabricacion = "Alemania", contenidoLupuloPorLitro = 10, graduacion = 0.08)
-	const jarraHofbrau2 = new Jarras(marca = hofbrau2, capacidad = 0.5)
-	const hofbrau3 = new Rubia(paisFabricacion = "Alemania", contenidoLupuloPorLitro = 10, graduacion = 0.08)
-	const jarraHofbrau3 = new Jarras(marca = hofbrau3, capacidad = 0.5)
+	const jarraHofbrauGrande = new Jarras(marca = hofbrau, capacidad = 1.5)
+	
 	const javier = new PersonaBelga(peso = 100, leGustaMusicaTradicional = true, nivelDeAguante = 100)
+	const fernando = new PersonaAlemana(peso = 140, leGustaMusicaTradicional = true, nivelDeAguante = 10)
+	const nacho = new PersonaAlemana(peso = 200, leGustaMusicaTradicional = true, nivelDeAguante = 10)
+	
+	const carpaCervezaRubia = new Carpa(
+		limiteDeGenteAdmitida = 10, 
+		personasEnCarpa = [javier, fernando, nacho], 
+		tocaBandaTradicional = true, 
+		marcaDeCerveza = hofbrau
+		) 
+	
 	method initialize() {
 		javier.agregarJarra(jarraHofbrau)
 		javier.agregarJarra(jarraHofbrau)
-		javier.agregarJarra(jarraHofbrau)
-		
+		javier.agregarJarra(jarraHofbrau)	
+		5.times{i => fernando.agregarJarra(jarraHofbrauGrande)}
+		5.times{i => nacho.agregarJarra(jarraHofbrauGrande)}
 	}
 		
 	test "El contenido de alcohol de una jarra de cerveza de 8% de graduacion es de 0.04" {
@@ -28,6 +39,12 @@ describe "Personas y Jarras" {
 	test "A javier le gusta la cerveza Rubia" {
 		assert.that(javier.leGusta(hofbrau))
 	}
-	
+	test "La carpa le da cerveza a Javier" {
+		carpaCervezaRubia.servirCerveza(javier, 2.5)
+		assert.equals(4, javier.jarrasCompradas().size())		
+	}
+	test "personas ebrias en la carpa" {
+		assert.equals(2, carpaCervezaRubia.cantEbriosEmpedernidos())
+	}	
 }
 	
