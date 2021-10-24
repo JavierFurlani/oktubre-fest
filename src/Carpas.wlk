@@ -12,24 +12,28 @@ class Carpa {
     }
     
     method agregarPersonaEnCarpa(persona) {
-    	if (persona.puedeEntrar())
-    	personasEnCarpa.add(persona)
+    	if (self.puedeEntrar(persona))
+    		personasEnCarpa.add(persona)
+    	else throw new Exception(message = "La persona no puede ingresar a la carpa.")
     }
     
     method entraUnoMas() {
     	return self.cantidadPersonasEnCarpa() < limiteDeGenteAdmitida   	
     }
-    
+
     method dejaIngresar(persona) {
     	return self.entraUnoMas() and not persona.estaEbria()
     }
     
+	method puedeEntrar(persona) {
+		return persona.quiereEntrar(self) and self.dejaIngresar(persona)
+	}
+    
     method servirCerveza(persona, capacidadJarra) {
-    	const jarra = new Jarras(capacidad = capacidadJarra, marca = marcaDeCerveza)
+    	const jarra = new Jarra(capacidad = capacidadJarra, marca = marcaDeCerveza)
     	if (personasEnCarpa.contains(persona)) {
     		persona.agregarJarra(jarra)
     	}
-    	// return if (personasEnCarpa.contains(persona)) true 
     	else throw new Exception(message = "La persona no está en la carpa.")
     }
     

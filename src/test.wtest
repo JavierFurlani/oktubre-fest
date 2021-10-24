@@ -2,33 +2,51 @@ import Personas.*
 import Marcas.*
 import Carpas.*
 
+describe "jarras con distintas marcas de cerveza" {
+	const corona = new Rubia(hechaEn = mexico, contenidoLupuloPorLitro = 1.5, graduacion = 0.045)
+	const guiness = new Negra(hechaEn = irlanda, contenidoLupuloPorLitro = 3)
+	const hofbrau = new Roja(hechaEn = alemania, contenidoLupuloPorLitro = 2.5)
+	const jarraCorona = new Jarra(marca = corona, capacidad = 0.5)
+	const jarraGuiness = new Jarra(marca = guiness, capacidad = 0.5)
+	const jarraHofbrau = new Jarra(marca = hofbrau, capacidad = 0.5)
+	test "la jarra de corona tiene 0.0225 de alcohol"{
+		assert.equals(0.0225,jarraCorona.contenidoDeAlcohol())
+	}
+	test "la jarra de guiness tiene 0.0525 de alcohol"{
+		assert.equals(0.0525,jarraGuiness.contenidoDeAlcohol())
+	}
+	test "la jarra de hofbrau tiene 0.06563 de alcohol"{
+		assert.equals(0.06563,jarraHofbrau.contenidoDeAlcohol())
+	}
+}
 
-describe "Personas y Jarras" {
-	const hofbrau = new Rubia(paisFabricacion = "Alemania", contenidoLupuloPorLitro = 10, graduacion = 0.08)
-	const jarraHofbrau = new Jarras(marca = hofbrau, capacidad = 0.5)
-	const jarraHofbrauGrande = new Jarras(marca = hofbrau, capacidad = 1.5)
+describe "Personas, jarras y la carpa" {
+	const weihenstephaner = new Rubia(hechaEn = alemania, contenidoLupuloPorLitro = 4.5, graduacion = 0.08)
+	const jarraWeihenstephaner = new Jarra(marca = weihenstephaner, capacidad = 0.5)
+	const jarraWeihenstephanerGrande = new Jarra(marca = weihenstephaner, capacidad = 1.5)
 	
 	const javier = new PersonaBelga(peso = 100, leGustaMusicaTradicional = true, nivelDeAguante = 100)
 	const fernando = new PersonaAlemana(peso = 140, leGustaMusicaTradicional = true, nivelDeAguante = 10)
 	const nacho = new PersonaAlemana(peso = 200, leGustaMusicaTradicional = true, nivelDeAguante = 10)
+	const ruben = new PersonaBelga(peso = 100, leGustaMusicaTradicional = true, nivelDeAguante = 10)
 	
 	const carpaCervezaRubia = new Carpa(
 		limiteDeGenteAdmitida = 10, 
 		personasEnCarpa = [javier, fernando, nacho], 
 		tocaBandaTradicional = true, 
-		marcaDeCerveza = hofbrau
-		) 
+		marcaDeCerveza = weihenstephaner
+	) 
 	
 	method initialize() {
-		javier.agregarJarra(jarraHofbrau)
-		javier.agregarJarra(jarraHofbrau)
-		javier.agregarJarra(jarraHofbrau)	
-		5.times{i => fernando.agregarJarra(jarraHofbrauGrande)}
-		5.times{i => nacho.agregarJarra(jarraHofbrauGrande)}
+		javier.agregarJarra(jarraWeihenstephaner)
+		javier.agregarJarra(jarraWeihenstephaner)
+		javier.agregarJarra(jarraWeihenstephaner)	
+		5.times{i => fernando.agregarJarra(jarraWeihenstephanerGrande)}
+		5.times{i => nacho.agregarJarra(jarraWeihenstephanerGrande)}
 	}
 		
 	test "El contenido de alcohol de una jarra de cerveza de 8% de graduacion es de 0.04" {
-		assert.equals(0.04, jarraHofbrau.contenidoDeAlcohol())
+		assert.equals(0.04, jarraWeihenstephaner.contenidoDeAlcohol())
 	}
 	test "El total de alcohol que ingirio Javier es 0.12" {
 		assert.equals(0.12, javier.totalDeAlcohol())
@@ -37,14 +55,26 @@ describe "Personas y Jarras" {
 		assert.notThat(javier.estaEbria())
 	}
 	test "A javier le gusta la cerveza Rubia" {
-		assert.that(javier.leGusta(hofbrau))
+		assert.that(javier.leGusta(weihenstephaner))
 	}
+	test "Ruben quiere y puede entrar a la carpa y la carpa lo deja ingresar" {
+		assert.that(carpaCervezaRubia.dejaIngresar(ruben))
+		assert.that(ruben.quiereEntrar(carpaCervezaRubia))
+		ruben.entrarACarpa(carpaCervezaRubia)
+		assert.equals(4, carpaCervezaRubia.cantidadPersonasEnCarpa())
+	}
+	
 	test "La carpa le da cerveza a Javier" {
 		carpaCervezaRubia.servirCerveza(javier, 2.5)
 		assert.equals(4, javier.jarrasCompradas().size())		
 	}
-	test "personas ebrias en la carpa" {
+	test "hay 2 ebrios empedernidos en la carpa" {
 		assert.equals(2, carpaCervezaRubia.cantEbriosEmpedernidos())
-	}	
+	}
+	test "Fernando y Nacho son patriotas pero Javier no" {
+		assert.that(fernando.esPatriota())
+		assert.that(nacho.esPatriota())
+		assert.notThat(javier.esPatriota())
+	}
 }
 	

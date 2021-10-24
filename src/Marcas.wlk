@@ -1,12 +1,17 @@
+object alemania {}
+object republicaCheca {}
+object belgica {}
+object mexico {}
+object irlanda {}
+
 class MarcasDeCerveza {
 	var property contenidoLupuloPorLitro
-	var property paisFabricacion
+	var property hechaEn
 	method graduacion()
 }
 
 object graduacionReglamentaria {
-	const property graduacion = 10
-	
+	const property graduacion = 0.105
 }
 
 class Rubia inherits MarcasDeCerveza {
@@ -30,7 +35,7 @@ class Roja inherits Negra {
 	}
 }
 
-class Jarras {
+class Jarra {
 	var property capacidad
 	var property marca
 	
