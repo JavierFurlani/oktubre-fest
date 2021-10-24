@@ -21,7 +21,7 @@ class Persona {
 
 	method leGusta(cerveza)
 	
-	method paisDeNacimiento()
+	method nacidoEn()
 	
 	method quiereEntrar(carpa) {
 		return self.leGusta(carpa.marcaDeCerveza()) && leGustaMusicaTradicional == carpa.tocaBandaTradicional()
@@ -36,12 +36,12 @@ class Persona {
 	}
 	
 	method esPatriota() {
-		return jarrasCompradas.all{jarra => jarra.marca().hechaEn() == self.paisDeNacimiento()}
+		return jarrasCompradas.all{jarra => jarra.marca().hechaEn() == self.nacidoEn()}
 	}
 }
 
 class PersonaBelga inherits Persona {
-	override method paisDeNacimiento() = belgica
+	override method nacidoEn() = "Belgica"
 	
 	
 	override method leGusta(cerveza) {
@@ -50,7 +50,7 @@ class PersonaBelga inherits Persona {
 }
 
 class PersonaAlemana inherits Persona {
-	override method paisDeNacimiento() = alemania
+	override method nacidoEn() = "Alemania"
 	
 	override method leGusta(cerveza) {
 		return true
@@ -62,7 +62,7 @@ class PersonaAlemana inherits Persona {
 }
 
 class PersonaCheca inherits Persona {
-	override method paisDeNacimiento() = republicaCheca
+	override method nacidoEn() = "RepublicaCheca"
 	
 	override method leGusta(cerveza) {
 		return cerveza.graduacion() > 8

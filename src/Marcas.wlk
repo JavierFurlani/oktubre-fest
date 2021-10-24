@@ -1,9 +1,3 @@
-object alemania {}
-object republicaCheca {}
-object belgica {}
-object mexico {}
-object irlanda {}
-
 class MarcasDeCerveza {
 	var property contenidoLupuloPorLitro
 	var property hechaEn

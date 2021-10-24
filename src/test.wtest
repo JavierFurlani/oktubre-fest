@@ -3,9 +3,9 @@ import Marcas.*
 import Carpas.*
 
 describe "jarras con distintas marcas de cerveza" {
-	const corona = new Rubia(hechaEn = mexico, contenidoLupuloPorLitro = 1.5, graduacion = 4.5)
-	const guiness = new Negra(hechaEn = irlanda, contenidoLupuloPorLitro = 3)
-	const hofbrau = new Roja(hechaEn = alemania, contenidoLupuloPorLitro = 2.5)
+	const corona = new Rubia(hechaEn = "Mexico", contenidoLupuloPorLitro = 1.5, graduacion = 4.5)
+	const guiness = new Negra(hechaEn = "Irlanda", contenidoLupuloPorLitro = 3)
+	const hofbrau = new Roja(hechaEn = "Alemania", contenidoLupuloPorLitro = 2.5)
 	const jarraCorona = new Jarra(marca = corona, capacidad = 0.5)
 	const jarraGuiness = new Jarra(marca = guiness, capacidad = 0.5)
 	const jarraHofbrau = new Jarra(marca = hofbrau, capacidad = 0.5)
@@ -21,7 +21,7 @@ describe "jarras con distintas marcas de cerveza" {
 }
 
 describe "Personas, jarras y la carpa" {
-	const weihenstephaner = new Rubia(hechaEn = alemania, contenidoLupuloPorLitro = 4.5, graduacion = 8)
+	const weihenstephaner = new Rubia(hechaEn = "Alemania", contenidoLupuloPorLitro = 4.5, graduacion = 8)
 	const jarraWeihenstephaner = new Jarra(marca = weihenstephaner, capacidad = 0.5)
 	const jarraWeihenstephanerGrande = new Jarra(marca = weihenstephaner, capacidad = 1.5)
 	
