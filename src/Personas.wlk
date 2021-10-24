@@ -65,6 +65,6 @@ class PersonaCheca inherits Persona {
 	override method paisDeNacimiento() = republicaCheca
 	
 	override method leGusta(cerveza) {
-		return cerveza.graduacion() > 0.08
+		return cerveza.graduacion() > 8
 	}
 }

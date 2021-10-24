@@ -3,25 +3,25 @@ import Marcas.*
 import Carpas.*
 
 describe "jarras con distintas marcas de cerveza" {
-	const corona = new Rubia(hechaEn = mexico, contenidoLupuloPorLitro = 1.5, graduacion = 0.045)
+	const corona = new Rubia(hechaEn = mexico, contenidoLupuloPorLitro = 1.5, graduacion = 4.5)
 	const guiness = new Negra(hechaEn = irlanda, contenidoLupuloPorLitro = 3)
 	const hofbrau = new Roja(hechaEn = alemania, contenidoLupuloPorLitro = 2.5)
 	const jarraCorona = new Jarra(marca = corona, capacidad = 0.5)
 	const jarraGuiness = new Jarra(marca = guiness, capacidad = 0.5)
 	const jarraHofbrau = new Jarra(marca = hofbrau, capacidad = 0.5)
-	test "la jarra de corona tiene 0.0225 de alcohol"{
+	test "la jarra de corona tiene 0.0225 lts de alcohol"{
 		assert.equals(0.0225,jarraCorona.contenidoDeAlcohol())
 	}
-	test "la jarra de guiness tiene 0.0525 de alcohol"{
-		assert.equals(0.0525,jarraGuiness.contenidoDeAlcohol())
+	test "la jarra de guiness tiene 0.03 lts de alcohol"{
+		assert.equals(0.03,jarraGuiness.contenidoDeAlcohol())
 	}
-	test "la jarra de hofbrau tiene 0.06563 de alcohol"{
-		assert.equals(0.06563,jarraHofbrau.contenidoDeAlcohol())
+	test "la jarra de hofbrau tiene 0.03125 lts de alcohol"{
+		assert.equals(0.03125,jarraHofbrau.contenidoDeAlcohol())
 	}
 }
 
 describe "Personas, jarras y la carpa" {
-	const weihenstephaner = new Rubia(hechaEn = alemania, contenidoLupuloPorLitro = 4.5, graduacion = 0.08)
+	const weihenstephaner = new Rubia(hechaEn = alemania, contenidoLupuloPorLitro = 4.5, graduacion = 8)
 	const jarraWeihenstephaner = new Jarra(marca = weihenstephaner, capacidad = 0.5)
 	const jarraWeihenstephanerGrande = new Jarra(marca = weihenstephaner, capacidad = 1.5)
 	
@@ -44,10 +44,7 @@ describe "Personas, jarras y la carpa" {
 		5.times{i => fernando.agregarJarra(jarraWeihenstephanerGrande)}
 		5.times{i => nacho.agregarJarra(jarraWeihenstephanerGrande)}
 	}
-		
-	test "El contenido de alcohol de una jarra de cerveza de 8% de graduacion es de 0.04" {
-		assert.equals(0.04, jarraWeihenstephaner.contenidoDeAlcohol())
-	}
+
 	test "El total de alcohol que ingirio Javier es 0.12" {
 		assert.equals(0.12, javier.totalDeAlcohol())
 	}
@@ -64,7 +61,8 @@ describe "Personas, jarras y la carpa" {
 		assert.equals(4, carpaCervezaRubia.cantidadPersonasEnCarpa())
 	}
 	
-	test "La carpa le da cerveza a Javier" {
+	test "La carpa le da una jarra de cerveza a Javier" {
+		assert.equals(3, javier.jarrasCompradas().size())
 		carpaCervezaRubia.servirCerveza(javier, 2.5)
 		assert.equals(4, javier.jarrasCompradas().size())		
 	}
